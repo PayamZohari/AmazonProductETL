@@ -11,8 +11,7 @@ This repository includes the data pipeline for the ETL process on a sample Amazo
 6. [Apache Airflow Integration](#apache-airflow-integration)
 7. [Setup Instructions](#setup-instructions)
 8. [Usage](#usage)
-9. [Contributing](#contributing)
-10. [License](#license)
+
 
 ## Project Overview
 This project implements an ETL (Extract, Transform, Load) pipeline that processes product data from an initial SQL or Excel source, cleans the data, and stores it in a MongoDB collection. The project also utilizes Apache Airflow to monitor and manage the ETL pipelines effectively.
