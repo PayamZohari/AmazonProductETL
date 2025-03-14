@@ -1,6 +1,6 @@
 # Project Title: ETL Pipeline for Product Data with MongoDB Storage
-This repository includes the data pipeline for ETL process on a sample Amazon products based on Daria's interview task.
 
+This repository includes the data pipeline for the ETL process on a sample Amazon products dataset based on Daria's interview task.
 
 ## Table of Contents
 1. [Project Overview](#project-overview)
@@ -76,6 +76,48 @@ Apache Airflow is utilized to manage and monitor the ETL pipelines. The followin
 Create a Directed Acyclic Graph (DAG) to orchestrate the ETL process. Define tasks for extraction, transformation, and loading, and set up dependencies between them.
 
 ## Setup Instructions
+Follow these steps to set up the project:
+
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/PayamZohari/AmazonProductETL.git
+   cd AmazonProductETL
+   ```
+
+2. **Set Up Apache Airflow**:
+   - Run the following command in the root directory of the project to start Apache Airflow:
+   ```bash
+   docker-compose up -d
+   ```
+   - Access Airflow on [localhost:8080](http://localhost:8080).
+
+3. **Set Up PostgreSQL**:
+   - Navigate to the `initial_db` directory and run:
+   ```bash
+   docker-compose up -d
+   ```
+   - This will set up PostgreSQL.
+
+4. **Load Data into PostgreSQL**:
+   - Run the `create_initial_db.py` script to load data from the Excel file into PostgreSQL:
+   ```bash
+   python create_initial_db.py
+   ```
+
+5. **Set Up MongoDB**:
+   - Go to the `final_db` directory and run:
+   ```bash
+   docker-compose up -d
+   ```
+   - This will set up MongoDB.
+
+6. **Run the ETL Process**:
+   - Finally, execute the `ETL.py` script to transfer data from PostgreSQL to MongoDB:
+   ```bash
+   python ETL.py
+   ```
+
+## Usage
+Once the setup is complete, you can monitor and manage the ETL process through the Airflow UI. You can also modify the DAG and tasks as needed for your requirements.
+
+
