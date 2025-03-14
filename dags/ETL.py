@@ -4,10 +4,11 @@ from airflow.decorators import task
 import pandas as pd
 import psycopg2
 from pymongo import MongoClient
+from decouple import config
 
 # Default arguments for the DAG
 default_args = {
-    'owner': 'airflow',
+    'owner': 'payam',
     'retries': 3,
     'retry_delay': timedelta(minutes=5),
 }
@@ -22,19 +23,19 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    # PostgreSQL connection parameters
+    # PostgreSQL connection parameters from environment variables
     pg_conn_params = {
-        'dbname': 'products',
-        'user': 'daria',
-        'password': 'daria1234',
-        'host': 'localhost',
-        'port': 5436
+        'dbname': config('PG_DBNAME'),
+        'user': config('PG_USER'),
+        'password': config('PG_PASSWORD'),
+        'host': config('PG_HOST'),
+        'port': config('PG_PORT')
     }
 
-    # MongoDB connection parameters
-    mongo_client = MongoClient('mongodb://localhost:27017/')
-    mongo_db = mongo_client['Amazon']  # Replace with your MongoDB database name
-    mongo_collection = mongo_db['Products']  # Replace with your MongoDB collection name
+    # MongoDB connection parameters from environment variables
+    mongo_client = MongoClient(config('MONGO_URI'))
+    mongo_db = mongo_client[config('MONGO_DB')]  # Use MongoDB database name from .env
+    mongo_collection = mongo_db[config('MONGO_COLLECTION')]  # Use MongoDB collection name from .env
 
     @task
     def extract_data():

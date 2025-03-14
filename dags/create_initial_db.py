@@ -2,16 +2,25 @@ import pandas as pd
 from sqlalchemy import create_engine, text
 import re
 import numpy as np
+from pymongo import MongoClient
+from decouple import config
 
-# Database connection details
-DB_USER = "daria"
-DB_PASS = "daria1234"
-DB_HOST = "localhost"
-DB_PORT = "5436"
-DB_NAME = "products"
+# Read database connection details from environment variables using decouple
+POSTGRES_HOST = config("POSTGRES_HOST", default="localhost")
+POSTGRES_PORT = config("POSTGRES_PORT", default="5436")
+POSTGRES_USER = config("POSTGRES_USER", default="daria")
+POSTGRES_PASS = config("POSTGRES_PASS", default="daria1234")
+POSTGRES_DB = config("POSTGRES_DB", default="products")
 
-# Create database connection
-engine = create_engine(f"postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}")
+MONGO_HOST = config("MONGO_HOST", default="localhost")
+MONGO_PORT = config("MONGO_PORT", default="27017")
+MONGO_USER = config("MONGO_USER", default="daria")
+MONGO_PASS = config("MONGO_PASS", default="daria1234")
+MONGO_DB = config("MONGO_DB", default="Amazon")
+MONGO_COLLECTION = config("MONGO_COLLECTION", default="Products")
+
+# Create PostgreSQL database connection
+engine = create_engine(f"postgresql://{POSTGRES_USER}:{POSTGRES_PASS}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}")
 
 # Load the Excel file
 file_path = "../Amazon-Products - online.xlsx"  # Replace with actual file path
@@ -34,7 +43,7 @@ df["actual_price"] = df["actual_price"].apply(clean_price)
 df["ratings"] = df["ratings"].replace({np.nan: None})
 df["no_of_ratings"] = df["no_of_ratings"].replace({np.nan: None})
 
-# Establish a database connection
+# Establish a database connection to PostgreSQL
 with engine.connect() as conn:
     # Truncate tables before inserting new data
     conn.execute(text("TRUNCATE TABLE sales, product_price, product RESTART IDENTITY CASCADE;"))
@@ -87,3 +96,18 @@ with engine.connect() as conn:
     conn.commit()
 
 print("Data successfully loaded into PostgreSQL")
+
+# Now, insert the cleaned data into MongoDB
+mongo_client = MongoClient(f"mongodb://{MONGO_USER}:{MONGO_PASS}@{MONGO_HOST}:{MONGO_PORT}/{MONGO_DB}")
+mongo_db = mongo_client[MONGO_DB]
+mongo_collection = mongo_db[MONGO_COLLECTION]
+
+# Prepare data for MongoDB
+mongo_data = df.copy()
+mongo_data['product_id'] = mongo_data['name'].map(product_mapping)
+mongo_data = mongo_data.drop(columns=['name'])  # Drop name column if not needed
+
+# Insert into MongoDB
+mongo_collection.insert_many(mongo_data.to_dict('records'))
+
+print("Data successfully loaded into MongoDB")
