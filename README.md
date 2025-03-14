@@ -51,8 +51,7 @@ The Entity-Relationship Diagram (ERD) illustrates the relationships between the 
    - Contains `ratings`, `no_of_ratings`, and `date`.
    - Relationship: Many-to-One with Product Price and Product Details.
 
-![ERD Diagram](./documents/Amazon%20Products%20-%20Daria.png)  
-*(Please ensure to replace this path with the actual path to your ERD diagram image.)*
+![ERD Diagram](./documents/Amazon%20Products%20-%20Daria.png)
 
 ## ETL Process
 The ETL process consists of the following steps:
