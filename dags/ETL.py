@@ -33,8 +33,8 @@ with DAG(
 
     # MongoDB connection parameters
     mongo_client = MongoClient('mongodb://localhost:27017/')
-    mongo_db = mongo_client['your_database']  # Replace with your MongoDB database name
-    mongo_collection = mongo_db['your_collection']  # Replace with your MongoDB collection name
+    mongo_db = mongo_client['Amazon']  # Replace with your MongoDB database name
+    mongo_collection = mongo_db['Products']  # Replace with your MongoDB collection name
 
     @task
     def extract_data():
