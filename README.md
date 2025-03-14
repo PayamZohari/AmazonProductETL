@@ -51,7 +51,7 @@ The Entity-Relationship Diagram (ERD) illustrates the relationships between the 
    - Contains `ratings`, `no_of_ratings`, and `date`.
    - Relationship: Many-to-One with Product Price and Product Details.
 
-![ERD Diagram](path/to/erd_diagram.png)  
+![ERD Diagram](./documents/Amazon%20Products%20-%20Daria.png)  
 *(Please ensure to replace this path with the actual path to your ERD diagram image.)*
 
 ## ETL Process
@@ -79,5 +79,5 @@ Create a Directed Acyclic Graph (DAG) to orchestrate the ETL process. Define tas
 ## Setup Instructions
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/yourproject.git
+   git clone https://github.com/PayamZohari/AmazonProductETL.git
    cd yourproject
