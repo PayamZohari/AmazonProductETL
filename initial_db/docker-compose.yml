@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  postgres:
+    build: .
+    ports:
+      - "5436:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: daria
+      POSTGRES_PASSWORD: daria1234
+      POSTGRES_DB: products
+
+volumes:
+  pg_data:
