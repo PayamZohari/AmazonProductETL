@@ -79,4 +79,3 @@ Create a Directed Acyclic Graph (DAG) to orchestrate the ETL process. Define tas
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/PayamZohari/AmazonProductETL.git
-   cd yourproject
