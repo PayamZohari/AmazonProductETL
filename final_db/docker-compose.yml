@@ -2,12 +2,15 @@ version: '3.1'
 
 services:
   mongodb:
-    image: mongo
+    image: docker.arvancloud.ir/mongo:latest  # Use the specific image from the private registry
     container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: daria    # Replace with your desired username
+      MONGO_INITDB_ROOT_PASSWORD: daria1234    # Replace with your desired password
 
 volumes:
   mongodb_data:
