@@ -77,6 +77,20 @@ Create a Directed Acyclic Graph (DAG) to orchestrate the ETL process. Define tas
 ## Setup Instructions
 Follow these steps to set up the project:
 
+environment variables:
+
+POSTGRES_HOST = "localhost"
+POSTGRES_PORT = "5436"
+POSTGRES_USER = "daria"
+POSTGRES_PASS = "daria1234"
+POSTGRES_DB = "products"
+MONGO_HOST = "localhost"
+MONGO_PORT = "27017"
+MONGO_USER = "daria"
+MONGO_PASS = "daria1234"
+MONGO_DB = "Amazon"
+MONGO_COLLECTION = "Products"
+
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/PayamZohari/AmazonProductETL.git
