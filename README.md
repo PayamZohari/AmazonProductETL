@@ -37,7 +37,7 @@ The initial data consists of three tables:
 
 ## ERD Diagram
 The Entity-Relationship Diagram (ERD) illustrates the relationships between the tables. You can view and edit the ERD using [Draw.io](https://app.diagrams.net/). Below is a description of the ERD structure:
-
+To draw this, I omitted redundancy of product id to reach highest level of normalization.
 1. **Product Price Table**:
    - Contains `actual_price` and `discount_price`.
    - Relationship: One-to-One with Product Details (via `product_id`).
